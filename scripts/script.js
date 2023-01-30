@@ -1,9 +1,12 @@
 window.onload = function(){
+    //Creamos el contexto del canvas
+    // con ello podremos dibujar sobre el
     const ctx = document.querySelector("canvas").getContext("2d");
 
+    //Creamos un array fijo para el juego
     const palabras= ["Lucha","Libertad","Titan","Mtusa","Albersou","Espada","Violeta","Zombie","Java","Lugia","Hueco","Bosque","Demonio","Merengue","Antonio","Caraculo","Matrix","Korea","Japon","Gorrion"];
     
-
+    //Generamos un numero aleatorio que escogera automaticamente una palabra
     let numAleat= GeneraAleatorio();
   
     function GeneraAleatorio() {
@@ -11,6 +14,27 @@ window.onload = function(){
     }
 
     console.log(numAleat);
+
+    let palabra=palabras[numAleat].split("");
+
+    for (letra of palabra){
+        let mispan=document.createElement("span");
+        
+        document.querySelector(".palabra").appendChild(mispan);
+         console.log(letra);
+    }
+   
+    //Añadimos una funcion al body para cada vez que pulsemos una tecla
+    document.body.addEventListener("keydown",juego);
+    //Y codificamos la funcion
+    function juego(even){
+        let mip=document.createElement("p");
+
+        mip.textContent=`${even.key}`;
+        document.body.appendChild(mip);
+    }
+
+
         //base
        ctx.beginPath();
        ctx.lineWidth=2;
