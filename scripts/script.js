@@ -15,7 +15,7 @@ window.onload = function(){
 
     console.log(numAleat);
 
-    let palabra=palabras[numAleat].split("");
+    let palabra=palabras[numAleat].toUpperCase().split("");
 
     for (letra of palabra){
         let mispan=document.createElement("span");
@@ -27,14 +27,63 @@ window.onload = function(){
     //Añadimos una funcion al body para cada vez que pulsemos una tecla
     document.body.addEventListener("keydown",juego);
     //Y codificamos la funcion
+  
+    let spans=document.querySelectorAll("span");
     function juego(even){
         let mip=document.createElement("p");
-
-        mip.textContent=`${even.key}`;
+        
+          let contador=0;
+          let existe=false;
+        let mayus=even.key.toUpperCase();
+        for (letra of palabra){
+            if (mayus==letra){                
+                spans[contador].textContent=mayus;
+                mip.textContent=`${even.key}`;
         document.body.appendChild(mip);
+                existe=true;
+            }
+            contador++;
+        }
+
+        if(!existe){
+            fallo();
+        }
     }
 
+    let cuentaFallos=0;
 
+    function fallo(){
+        cuentaFallos++;
+
+        switch(cuentaFallos){
+            case 1:
+                pintaBase();
+                break;
+            case 2:
+                pintaPalo();
+                break;
+            case 3:
+                pintaViga();
+                break;
+            case 4:
+                pintaCuerda();
+                break;
+            case 5:
+                pintaCabeza();
+                break;
+            case 6:
+                pintaCuerpo();
+                break;
+            case 7:
+                pintaExtremidades();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    function pintaBase(){
         //base
        ctx.beginPath();
        ctx.lineWidth=2;
@@ -44,7 +93,9 @@ window.onload = function(){
        ctx.lineTo(110,120);
        ctx.stroke();
        ctx.closePath();
+    }
 
+    function pintaPalo(){
        //palo vertical
        ctx.beginPath();
        ctx.strokeStyle="brown";
@@ -52,7 +103,9 @@ window.onload = function(){
        ctx.lineTo(50,30);
        ctx.stroke();
        ctx.closePath();
+    }
 
+    function pintaViga(){
        //palo horizontal
        ctx.beginPath();
        ctx.strokeStyle="yellow";
@@ -60,7 +113,9 @@ window.onload = function(){
        ctx.lineTo(100,30);
        ctx.stroke();
        ctx.closePath();
-        
+    }
+
+    function pintaCuerda(){
         //cuerda
        ctx.beginPath();
        ctx.strokeStyle="limegreen";
@@ -68,7 +123,9 @@ window.onload = function(){
        ctx.lineTo(100,50);
        ctx.stroke();
        ctx.closePath();
+    }
 
+    function pintaCabeza(){
        //cabesa illo
        ctx.beginPath();
        ctx.strokeStyle="blue";
@@ -79,8 +136,8 @@ window.onload = function(){
        ctx.lineWidth=2;
        ctx.stroke();
        ctx.closePath();
-
-
+    }
+    function pintaCuerpo(){
        //cuerpaso
        ctx.beginPath();
        ctx.strokeStyle="pink";
@@ -88,7 +145,9 @@ window.onload = function(){
        ctx.lineTo(100,100);
        ctx.stroke();
        ctx.closePath();
+    }
 
+    function pintaExtremidades(){
        //extremidades
 
         //pierna izquierda
@@ -123,5 +182,6 @@ window.onload = function(){
        ctx.lineTo(110,90);
        ctx.stroke();
        ctx.closePath();
+    }
 
 }
