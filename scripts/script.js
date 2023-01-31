@@ -5,6 +5,9 @@ window.onload = function(){
 
     //Creamos un array fijo para el juego
     const palabras= ["Lucha","Libertad","Titan","Mtusa","Albersou","Espada","Violeta","Zombie","Java","Lugia","Hueco","Bosque","Demonio","Merengue","Antonio","Caraculo","Matrix","Korea","Japon","Gorrion"];
+    const abcdario = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+        't', 'u', 'v', 'w', 'x', 'y', 'z'];
     
     //Generamos un numero aleatorio que escogera automaticamente una palabra
     let numAleat= GeneraAleatorio();
@@ -19,6 +22,8 @@ window.onload = function(){
 
     for (letra of palabra){
         let mispan=document.createElement("span");
+
+        mispan.className="letra"
         
         document.querySelector(".palabra").appendChild(mispan);
          console.log(letra);
@@ -26,25 +31,29 @@ window.onload = function(){
    
     //Añadimos una funcion al body para cada vez que pulsemos una tecla
     document.body.addEventListener("keydown",juego);
-    //Y codificamos la funcion
-  
-    let spans=document.querySelectorAll("span");
+    //Y codificamos la funcion     
+    let spans=document.querySelectorAll(".letra");
+    
     function juego(even){
         let mip=document.createElement("p");
         
           let contador=0;
           let existe=false;
         let mayus=even.key.toUpperCase();
+        //para cada letra de nuestra palabra comprobamos si coincide con la pulsada
         for (letra of palabra){
-            if (mayus==letra){                
+            if (mayus==letra){
+                //si coincide, pintamos la letra donde corresponda (con el contador)
                 spans[contador].textContent=mayus;
                 mip.textContent=`${even.key}`;
         document.body.appendChild(mip);
+                //y marcamos existe como true, para que no cuente como un intento fallido
                 existe=true;
             }
             contador++;
         }
 
+        //Si no existe, llamamos a la funcion fallo
         if(!existe){
             fallo();
         }
@@ -52,9 +61,11 @@ window.onload = function(){
 
     let cuentaFallos=0;
 
+    //En esta funcion veremos el funcionamiento por si no acertamos la letra de una palabra
     function fallo(){
+        //aumentamos el contador
         cuentaFallos++;
-
+        //y dependiendo de ese numero, vamos llamando a las funciones que pintan cada parte del ahorcado
         switch(cuentaFallos){
             case 1:
                 pintaBase();
