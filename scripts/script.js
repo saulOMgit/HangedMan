@@ -5,15 +5,14 @@ window.onload = function(){
 
     //Creamos un array fijo para el juego
     const palabras= ["Lucha","Libertad","Titan","Mtusa","Albersou","Espada","Violeta","Zombie","Java","Lugia","Hueco","Bosque","Demonio","Merengue","Antonio","Caraculo","Matrix","Korea","Japon","Gorrion"];
-    const abcdario = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-        't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    
+    const abcdario = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     
     //Generamos un numero aleatorio que escogera automaticamente una palabra
     let numAleat= GeneraAleatorio();
   
     function GeneraAleatorio() {
-        return Math.floor(Math.random() * (palabras.length - 1) + 1);
+        return Math.floor(Math.random() * (palabras.length - 0) + 0);
     }
 
     console.log(numAleat);
@@ -39,19 +38,20 @@ window.onload = function(){
         
           let contador=0;
           let existe=false;
-        let mayus=even.key.toUpperCase();
-        //para cada letra de nuestra palabra comprobamos si coincide con la pulsada
-        for (letra of palabra){
-            if (mayus==letra){
-                //si coincide, pintamos la letra donde corresponda (con el contador)
-                spans[contador].textContent=mayus;
-                mip.textContent=`${even.key}`;
-        document.body.appendChild(mip);
-                //y marcamos existe como true, para que no cuente como un intento fallido
-                existe=true;
+        
+            let mayus=even.key.toUpperCase();
+            //para cada letra de nuestra palabra comprobamos si coincide con la pulsada
+            for (letra of palabra){
+                if (mayus==letra){
+                    //si coincide, pintamos la letra donde corresponda (con el contador)
+                    spans[contador].textContent=mayus;
+                    mip.textContent=`${even.key}`;
+            document.body.appendChild(mip);
+                    //y marcamos existe como true, para que no cuente como un intento fallido
+                    existe=true;
+                }
+                contador++;
             }
-            contador++;
-        }
 
         //Si no existe, llamamos a la funcion fallo
         if(!existe){
@@ -87,6 +87,7 @@ window.onload = function(){
                 break;
             case 7:
                 pintaExtremidades();
+                document.body.removeEventListener("keydown",juego)
                 break;
             default:
                 break;
