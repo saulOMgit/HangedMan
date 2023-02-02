@@ -22,7 +22,7 @@ window.onload = function(){
     for (letra of palabra){
         let mispan=document.createElement("span");
 
-        mispan.className="letra"
+        mispan.className="letra";
         
         document.querySelector(".palabra").appendChild(mispan);
          console.log(letra);
@@ -45,7 +45,7 @@ window.onload = function(){
                 if (mayus==letra){
                     //si coincide, pintamos la letra donde corresponda (con el contador)
                     spans[contador].textContent=mayus;
-                    mip.textContent=`${even.key}`;
+                    mip.textContent=`${even.code}`;
             document.body.appendChild(mip);
                     //y marcamos existe como true, para que no cuente como un intento fallido
                     existe=true;
