@@ -12,7 +12,7 @@ window.onload = function(){
     let numAleat= GeneraAleatorio();
   
     function GeneraAleatorio() {
-        return Math.floor(Math.random() * (palabras.length - 0) + 0);
+        return Math.floor(Math.random() * palabras.length);
     }
 
     console.log(numAleat);
@@ -33,6 +33,25 @@ window.onload = function(){
     //Y codificamos la funcion     
     let spans=document.querySelectorAll(".letra");
     
+    //Lanzamos la funcion que generara la pista
+    pista(palabra);
+
+    function pista(palabra){
+        //generamos un numero aleatorio que nos dara una letra de la palabra escogida
+        let numPista=Math.floor(Math.random()*palabra.length);
+        //la guardamos en una variable
+        let mipista=palabra[numPista];
+        
+        let contadorPista=0;
+        //Recorremos la palabra y la guardamos en el span correspondiente
+        for (letra of palabra){
+            if(mipista==letra){
+                spans[contadorPista].textContent=mipista;
+            }
+            contadorPista++;
+        }
+    }
+
     function juego(even){
         let mip=document.createElement("p");
         
@@ -56,9 +75,12 @@ window.onload = function(){
         //Si no existe, llamamos a la funcion fallo
         if(!existe){
             fallo();
+        } else{
+            correccion();
         }
-    }
 
+    }
+    
     let cuentaFallos=0;
 
     //En esta funcion veremos el funcionamiento por si no acertamos la letra de una palabra
@@ -77,7 +99,7 @@ window.onload = function(){
                 pintaViga();
                 break;
             case 4:
-                pintaCuerda();
+                pintaCuerda();                
                 break;
             case 5:
                 pintaCabeza();
@@ -93,6 +115,30 @@ window.onload = function(){
                 break;
         }
 
+    }
+
+    function correccion(){
+
+        let mispan=document.querySelectorAll(".palabra");
+        let mipalabra="";
+        for (span of mispan){
+            mipalabra+=span.textContent;
+        }
+        console.log(mipalabra);
+
+        if(palabras[numAleat].toUpperCase()==mipalabra){
+            document.body.removeEventListener("keydown",juego);
+
+            let spreiniciar= document.createElement("span");
+            spreiniciar.className="reiniciar";
+            spreiniciar.textContent="Reiniciar";
+            spreiniciar.addEventListener("click",reiniciar);
+            document.body.appendChild(spreiniciar);
+        }
+    }
+
+    function reiniciar(){
+        window.location.reload();
     }
 
     function pintaBase(){

@@ -31,3 +31,10 @@ p{
           0 0 0.2em DarkOrange;
     color: white;
 }
+
+.reiniciar{
+    height: 100px;
+    width: 300px;
+    background-color: black;
+    color: hotpink;
+}
