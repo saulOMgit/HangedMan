@@ -78,7 +78,7 @@ window.onload = function(){
         } else{
             correccion();
         }
-
+        pintaUsadas(mayus);
     }
     
     let cuentaFallos=0;
@@ -109,7 +109,19 @@ window.onload = function(){
                 break;
             case 7:
                 pintaExtremidades();
-                document.body.removeEventListener("keydown",juego)
+                let perdiste=document.createElement("p");
+                perdiste.className="perdiste";
+                perdiste.textContent="Perdiste!!!";
+                document.body.appendChild(perdiste);                
+                document.body.removeEventListener("keydown",juego);
+
+                let spreiniciar= document.createElement("span");
+                spreiniciar.className="reiniciar";
+                spreiniciar.textContent="Reiniciar";
+                spreiniciar.addEventListener("click",reiniciar);
+
+                document.body.appendChild(spreiniciar);
+
                 break;
             default:
                 break;
@@ -119,7 +131,7 @@ window.onload = function(){
 
     function correccion(){
 
-        let mispan=document.querySelectorAll(".palabra");
+        let mispan=document.querySelectorAll(".letra");
         let mipalabra="";
         for (span of mispan){
             mipalabra+=span.textContent;
@@ -133,12 +145,42 @@ window.onload = function(){
             spreiniciar.className="reiniciar";
             spreiniciar.textContent="Reiniciar";
             spreiniciar.addEventListener("click",reiniciar);
+
+            let ganaste=document.createElement("p");
+            ganaste.className="ganaste";
+            ganaste.textContent="Ganaste!!!";
+            document.body.appendChild(ganaste);
             document.body.appendChild(spreiniciar);
         }
     }
 
     function reiniciar(){
         window.location.reload();
+    }
+
+    function pintaUsadas(even){
+        let usada=document.querySelector(".usada");
+        let usadas=document.querySelectorAll(".usadas");
+        let existe=false;
+
+        if(!usadas){
+            let spanusado=document.createElement("span");
+            spanusado.textContent=even;
+            usada.appendChild(spanusado);
+        }else{
+        for (let letra of usadas){
+            if(letra.textContent==even){
+                existe=true;
+            }
+        }
+
+        if(!existe){
+            let spanusado=document.createElement("span");
+            spanusado.textContent=even;
+            spanusado.className="usadas";
+            usada.appendChild(spanusado);
+        }
+    }
     }
 
     function pintaBase(){

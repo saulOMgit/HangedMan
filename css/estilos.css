@@ -4,14 +4,14 @@ canvas{
     background-color: grey;
 }
 
-.palabra,.usadas{
+.palabra,.usada{
     width: 50%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 20px;
 }
-span{
+.letra{
     /* display: inline-block; */
     text-align: center;
     width: 30px;
@@ -23,8 +23,12 @@ span{
     
 }
 
-p{
+.usadas{
     text-decoration: line-through;
+}
+
+p{
+   
     text-shadow: -1px 0 white, 0 1px white,
         1px 0 white, 0 -1px white;
     text-shadow: 0 0 0.2em DarkOrange, 0 0 0.2em black,
@@ -33,8 +37,17 @@ p{
 }
 
 .reiniciar{
-    height: 100px;
+    display: inline-block;
+    height: 50px;
     width: 300px;
     background-color: black;
     color: hotpink;
+    text-align: center;
+    line-height: 50px;
+}
+
+.reiniciar:hover{
+    background-color: hotpink;
+    color: black;
+
 }
